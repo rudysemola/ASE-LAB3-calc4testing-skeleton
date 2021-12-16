@@ -7,8 +7,12 @@ class QuickstartUser(HttpUser):
 
     @task
     def index_page(self):
-        pass
+        self.client.get("/")
 
     @task(3)
     def view_item(self):
+        for item_id in range(10):
+            self.client.get(f"/calc/sum?m={item_id}&n={42}", name="/calc/sum")
+
+    def on_start(self):
         pass
